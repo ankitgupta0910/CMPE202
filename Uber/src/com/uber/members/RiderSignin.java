@@ -151,7 +151,8 @@ public class RiderSignin {
 			System.out.println("Enter Type [Basic/Luxury]: ");
 			request.setVechicleType(sc.nextLine());
 
-			
+			System.out.println("Child Seat [Y/N]: ");
+			request.setVechicleChild(sc.nextLine());
 
 		
 

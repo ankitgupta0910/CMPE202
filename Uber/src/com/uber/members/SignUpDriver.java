@@ -20,6 +20,7 @@ public class SignUpDriver {
 		setLicenseNumber();
 		setVehicleType();
 		setVehicleColor();
+		setChildSeat();
 		storeData();
 	}
 	
@@ -86,6 +87,12 @@ public class SignUpDriver {
 		System.out.println("What color is your Vehicle?");
 		String color = sc.nextLine();
 		driver.setVehicleColor(color);
+	}
+	
+	public void setChildSeat(){
+		System.out.println("Do you have Child seat?");
+		String child = sc.nextLine();
+		driver.setVehicleChild(child);
 	}
 	
 	public void storeData(){

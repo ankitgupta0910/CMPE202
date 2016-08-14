@@ -30,13 +30,14 @@ public class DatabaseManagement {
             con = DriverManager.getConnection(URL, USER, PASS);
             st = con.createStatement();
             
-            String stmt = "Insert into request (RiderId,SourceAddress,DestAddress,RideTime,VehicleType,RequestType,ReqState) values ('"+rider.getRiderId()+"','"
+            String stmt = "Insert into request (RiderId,SourceAddress,DestAddress,RideTime,VehicleType,RequestType,ReqChildSeat,ReqState) values ('"+rider.getRiderId()+"','"
             										 +request.getPickUpLocation()+"','"
             										 +request.getDestination()+"','"
         
             										 +request.getBookingDate()+"','"
             										 +request.getVechicleType()+"','"
             										 +request.getRequestType()+"','"
+                    								 +request.getVechicleChild()+"','"
        												 +request.getState()+"')";
             										
             st.executeUpdate(stmt);

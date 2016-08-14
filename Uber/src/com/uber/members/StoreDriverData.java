@@ -29,7 +29,7 @@ public class StoreDriverData {
             con = DriverManager.getConnection(url, user, password);
             st = con.createStatement();
 
-            String stmt = "Insert into driver (DriverName,Address,Phone,DOB,DriverLicenseNumber,VehicleColor,VehicleRegNumber,VehicleType,Email,Password,DriverRating,DriverStatus) values ('"+driver.getName()+"','"
+            String stmt = "Insert into driver (DriverName,Address,Phone,DOB,DriverLicenseNumber,VehicleColor,VehicleRegNumber,VehicleType,Email,Password,HasChildSeat,DriverRating,DriverStatus) values ('"+driver.getName()+"','"
             										 +driver.getAddress()+"','"
             										 +driver.getPhone()+"','"
             										 +driver.getDob()+"','"
@@ -38,7 +38,8 @@ public class StoreDriverData {
             										 +driver.getVehicleRegNumber()+"','"
        												 +driver.getVehicleType()+"','"
             										 +driver.getEmail()+"','"
-            										 +driver.getPass()+"','0','offline')";
+    n												 +driver.getPass()+"','"
+            										 +driver.getVehicleChild()+"','0','offline')";
             st.executeUpdate(stmt);
 
         } catch (SQLException ex) {

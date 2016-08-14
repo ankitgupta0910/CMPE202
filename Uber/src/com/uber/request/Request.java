@@ -17,6 +17,7 @@ public class Request implements RideRequestInterface {
 
 	private Date bookingDate;
 	private String vechicleType;
+	private String vehicleChild;
 	private double FareEstimation;
 	
 
@@ -178,4 +179,11 @@ public class Request implements RideRequestInterface {
 		this.vechicleType = vechicleType;
 	}
 
+	public String getVechicleChild() {
+		return vehicleChild;
+	}
+
+	public void setVechicleChild(String vechicleChild) {
+		this.vehicleChild = vechicleChild;
+	}
 }
