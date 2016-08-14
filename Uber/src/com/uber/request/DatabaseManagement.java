@@ -11,9 +11,9 @@ import com.uber.members.Rider;
 
 public class DatabaseManagement {
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
-	private static final String URL = "jdbc:mysql://localhost:3307/uber";
-	private static final String USER = "root";
-	private static final String PASS = "";
+	private static final String URL = "jdbc:mysql://spartanride.c1d5rowcx4kr.us-west-2.rds.amazonaws.com:3306/spartanride";
+	private static final String USER = "spartanride";
+	private static final String PASS = "spartanride123";
 
 	Statement stmt = null;
 	PreparedStatement preparedStatement = null;

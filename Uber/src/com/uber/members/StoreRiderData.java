@@ -20,9 +20,9 @@ public class StoreRiderData {
 		Statement st = null;
 		ResultSet rs = null;
 
-		String url = "jdbc:mysql://localhost:3307/uber";
-		String user = "root";
-		String password = "";
+		String url = "jdbc:mysql://spartanride.c1d5rowcx4kr.us-west-2.rds.amazonaws.com:3306/spartanride";
+		String user = "spartanride";
+		String password = "spartanride123";
 
 		try {
 
