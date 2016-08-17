@@ -5,7 +5,7 @@ import java.util.Date;
 public class Request implements RideRequestInterface {
 	
 
-	private long requestId;
+	private int requestId;
 	RequestState requestState;
 	private String requestType="normal";
 
@@ -19,6 +19,7 @@ public class Request implements RideRequestInterface {
 	private String vechicleType;
 	private String vehicleChild;
 	private double FareEstimation;
+	private int bidFare;
 	
 
 	
@@ -61,12 +62,12 @@ public class Request implements RideRequestInterface {
 
 	
 
-	public long getRequestId() {
+	public int getRequestId() {
 		return requestId;
 	}
 
-	public void setRequestId(long time) {
-		this.requestId = time;
+	public void setRequestId(int requestId){
+		this.requestId=requestId;
 	}
 
 	public String getRequestType() {
@@ -123,7 +124,8 @@ public class Request implements RideRequestInterface {
 				+ "]");
 		sb.append("\nBooking Date: " + bookingDate);
 		sb.append("\nCar Type: " + vechicleType);
-	
+		sb.append("\nEstimated Fare: " + bidFare);
+		FareEstimation+=bidFare;
 		sb.append("\nEstimated Fare: " + FareEstimation);
 		
 
@@ -185,5 +187,13 @@ public class Request implements RideRequestInterface {
 
 	public void setVechicleChild(String vechicleChild) {
 		this.vehicleChild = vechicleChild;
+	}
+
+	public int getBidFare() {
+		return bidFare;
+	}
+
+	public void setBidFare(int bidFare) {
+		this.bidFare = bidFare;
 	}
 }

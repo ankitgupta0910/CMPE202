@@ -1,11 +1,18 @@
 package com.uber.members;
 
 import java.sql.Connection;
+import com.uber.constants.*;
+
+import uber.dispatch.driver.DriverCurrentState;
+import uber.dispatch.driver.IsOnline;
+
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
+
+
 
 public class DriverSignin {
 	Driver driver;
@@ -19,7 +26,13 @@ public class DriverSignin {
 		String email = sc.nextLine();
 		System.out.println("Enter Password: ");
 		String pass = sc.nextLine();
-		return checkDriver(email,pass);
+		
+		
+		driver=checkDriver(email,pass);
+		DriverCurrentState dS=new DriverCurrentState(driver);
+		dS.setDriverState(new IsOnline(driver));
+		return driver;
+		
 	}
 
 	public Driver checkDriver(String email, String pass){
@@ -27,20 +40,18 @@ public class DriverSignin {
 		Statement st = null;
 		ResultSet rs = null;
 
-		String url = "jdbc:mysql://spartanride.c1d5rowcx4kr.us-west-2.rds.amazonaws.com:3306/spartanride";
-		String user = "spartanride";
-		String password = "spartanride123";
+		
 
 		try {
 
-			con = DriverManager.getConnection(url, user, password);
+			con = DriverManager.getConnection(Constant.URL, Constant.USERNAME, Constant.PASSWORD);
 			st = con.createStatement();
 			
 			String stmt = "Select * from driver where Email = '"+email+"' and Password = '"+pass+"'";
 			rs=st.executeQuery(stmt);
-			System.out.println(rs.toString());
+		
 
-			if(rs.next()){
+			while(rs.next()){
 				
 				driver.setDriverId(rs.getInt("DriverId"));
 				driver.setAddress(rs.getString("Address"));
@@ -54,8 +65,7 @@ public class DriverSignin {
 				driver.setVehicleRegNumber(rs.getString("VehicleRegNumber"));
 				driver.setVehicleType(rs.getString("VehicleType"));
 
-				String stm = "update Driver set DriverStatus='online' where Email='"+email+"'";
-				st.executeUpdate(stm);
+				
 				return driver;
 			}
 

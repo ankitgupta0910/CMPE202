@@ -1,6 +1,8 @@
 package com.uber.members;
 
 import java.sql.Connection;
+
+import com.uber.constants.*;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -11,6 +13,8 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import com.uber.request.Request;
+
+
 
 public class RiderSignin {
 	Rider rider=new Rider();
@@ -37,13 +41,11 @@ public class RiderSignin {
 		Statement st = null;
 		ResultSet rs = null;
 
-		String url = "jdbc:mysql://spartanride.c1d5rowcx4kr.us-west-2.rds.amazonaws.com:3306/spartanride";
-		String user = "spartanride";
-		String password = "spartanride123";
+		
 
 		try {
 			
-			con = DriverManager.getConnection(url, user, password);
+			con = DriverManager.getConnection(Constant.URL, Constant.USERNAME, Constant.PASSWORD);
 			st = con.createStatement();
 			
 			String stmt = "select * from rider where Email = '"+email+"' and Password = '"+pass+"'";
@@ -99,8 +101,8 @@ public class RiderSignin {
 		try {
 
 			Request request = new Request();
-			long time = System.currentTimeMillis();
-			request.setRequestId(time);
+			
+			
 			System.out.println();
 			System.out.println("___________________________________________________________________");
 			System.out.println("Request a ride ");
@@ -153,6 +155,13 @@ public class RiderSignin {
 
 			System.out.println("Child Seat [Y/N]: ");
 			request.setVechicleChild(sc.nextLine());
+			System.out.println("You can also Bid for Cab [y/n]: ");
+			if (sc.nextLine().equalsIgnoreCase("y")) {
+				System.out.println("Amount for which you want to bid: ");
+				int bid=Integer.parseInt(sc.nextLine());
+
+				request.setBidFare(bid);
+			}
 
 		
 

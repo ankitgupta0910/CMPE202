@@ -8,19 +8,20 @@ public class RideInProgress implements RideState {
 		
 	}
 	@Override
-	public String rideStart() {
-		// TODO Auto-generated method stub
-		return null;
+	public void rideStart() {
+		System.out.println("Ride Already Started");
 	}
 	@Override
-	public String rideEnd() {
+	public void rideEnd(int driverId) {
 		// TODO Auto-generated method stub
-		return null;
+		System.out.println("Ride In Progress");
 	}
 	@Override
 	public String rideInProgress() {
 		// TODO Auto-generated method stub
-		return null;
+		Ride ridde=(Ride)request;
+		System.out.println("Ride in progress with RequestId: "+ridde.getRequest().getRequestId());
+		return ridde.getRequest().getRequestId()+"";
 	}
 	
 

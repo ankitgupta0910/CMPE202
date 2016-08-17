@@ -1,5 +1,9 @@
 package com.uber.request;
 
+import com.uber.dispatcher.DispatchDriver;
+
+
+
 public class RequestAccepted implements RequestState {
 
 	
@@ -26,8 +30,21 @@ public class RequestAccepted implements RequestState {
 	public String requestAccepted() {
 		
 		// TODO Auto-generated method stub
-		request.setState(new RequestCompleted(request));
-		return "Request Accepted! Welcome To Ride";
+		
+		DispatchDriver dispatch = new DispatchDriver();
+		Request newreq = (Request)request;
+		try{
+			dispatch.dispatchRequest(newreq);
+		
+			request.setState(new RequestCompleted(request));
+			return "Request Accepted! Welcome To Ride";
+		}
+		
+		catch(Exception e){
+
+			return "Booking failed, Please try again";
+		}
+		
 		
 	}
 

@@ -1,73 +1,37 @@
 package com.uber.ride;
 
-import java.util.Date;
+
+import com.uber.request.Request;
 
 public class Ride implements RideInterface {
 	
-	private int requestId;
-	
-	private String pickupLoc;
-	private String destination;
-	
-	private Date pickupDate;
-	private String vehicleType;
-	private double fareEstimation;
+	private Request request;
+	private int rideId;
+    private String rideStartTime;
+    private String rideEndTime;
+    private int fare;
 	
 	RideState rideState;
 	
 	public Ride() {
 		rideState = new RideStarted(this);
 	}
-	public int getRequestId() {
-		return requestId;
-	}
-	public void setRequestId(int requestId) {
-		this.requestId = requestId;
-	}
-	public String getPickupLoc() {
-		return pickupLoc;
-	}
-	public void setPickupLoc(String pickupLoc) {
-		this.pickupLoc = pickupLoc;
-	}
-	public String getDestination() {
-		return destination;
-	}
-	public void setDestination(String destination) {
-		this.destination = destination;
-	}
-	public Date getPickupDate() {
-		return pickupDate;
-	}
-	public void setPickupDate(Date pickupDate) {
-		this.pickupDate = pickupDate;
-	}
-	public String getVehicleType() {
-		return vehicleType;
-	}
-	public void setVehicleType(String vehicleType) {
-		this.vehicleType = vehicleType;
-	}
-	public double getFareEstimation() {
-		return fareEstimation;
-	}
-	public void setFareEstimation(double fareEstimation) {
-		this.fareEstimation = fareEstimation;
+	
+	
+	@Override
+	public void rideStart(int driverId) {
+		// TODO Auto-generated method stub
+		rideState.rideStart();
 	}
 	@Override
-	public void rideStart() {
+	public void rideEnd(int driverID) {
 		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void rideEnd() {
-		// TODO Auto-generated method stub
-		
+		rideState.rideEnd(driverID);
 	}
 	@Override
 	public void rideInProgress() {
 		// TODO Auto-generated method stub
-		
+		rideState.rideInProgress();
 	}
 	@Override
 	public RideState getState() {
@@ -78,6 +42,59 @@ public class Ride implements RideInterface {
 	public void setState(RideState s) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public Request getRequest() {
+		return request;
+	}
+
+	public void setRequest(Request request) {
+		this.request = request;
+	}
+
+	public String getRideEndTime() {
+		return rideEndTime;
+	}
+
+	public void setRideEndTime() {
+		java.util.Date dt = new java.util.Date();
+
+		java.text.SimpleDateFormat sdf = 
+		     new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		 rideEndTime = sdf.format(dt);
+		
+	}
+
+	public String getRideStartTime() {
+		return rideStartTime;
+	}
+
+	public void setRideStartTime() {
+		java.util.Date dt = new java.util.Date();
+
+		java.text.SimpleDateFormat sdf = 
+		     new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		 rideStartTime = sdf.format(dt);
+	}
+
+
+	public int getFare() {
+		return fare;
+	}
+
+
+	public void setFare(int fare) {
+		this.fare = fare;
+	}
+
+
+	public int getRideId() {
+		return rideId;
+	}
+
+
+	public void setRideId(int rideId) {
+		this.rideId = rideId;
 	}
 	
 

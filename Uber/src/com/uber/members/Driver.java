@@ -8,6 +8,10 @@ public class Driver extends Member{
 	private String vehicleColor;
 	private String vehicleChild;
 	private int driverId;
+	private String driverRating;
+	private int sourceLat;
+	private int sourceLong;
+	private String childSeat;
 	
 	
 	public String getLicenseNumber() {
@@ -45,5 +49,29 @@ public class Driver extends Member{
 	}
 	public void setDriverId(int driverId) {
 		this.driverId = driverId;
+	}
+	public String getDriverRating() {
+		return driverRating;
+	}
+	public void setDriverRating(String driverRating) {
+		this.driverRating = driverRating;
+	}
+	public int getSourceLong() {
+		return sourceLong;
+	}
+	public void setSourceLong(int sourceLong) {
+		this.sourceLong = sourceLong;
+	}
+	public int getSourceLat() {
+		return sourceLat;
+	}
+	public void setSourceLat(int sourceLat) {
+		this.sourceLat = sourceLat;
+	}
+	public String getChildSeat() {
+		return childSeat;
+	}
+	public void setChildSeat(String childSeat) {
+		this.childSeat = childSeat;
 	}
 }

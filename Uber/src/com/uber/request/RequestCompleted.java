@@ -32,7 +32,8 @@ public class RequestCompleted implements RequestState{
 	@Override
 	public String requestCompleted() {
 		// TODO Auto-generated method stub
-		return "Ride Completed Successfuly ! Thanks for the ride";
+		
+		return "Request Completed Successfuly ! Enjoy Your Ride";
 		
 		
 	}

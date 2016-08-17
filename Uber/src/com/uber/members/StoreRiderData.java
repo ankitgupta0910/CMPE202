@@ -1,5 +1,6 @@
 package com.uber.members;
 import java.sql.Connection;
+import com.uber.constants.*;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,13 +21,11 @@ public class StoreRiderData {
 		Statement st = null;
 		ResultSet rs = null;
 
-		String url = "jdbc:mysql://spartanride.c1d5rowcx4kr.us-west-2.rds.amazonaws.com:3306/spartanride";
-		String user = "spartanride";
-		String password = "spartanride123";
+		
 
 		try {
 
-			con = DriverManager.getConnection(url, user, password);
+			con = DriverManager.getConnection(Constant.URL, Constant.USERNAME, Constant.PASSWORD);
 			st = con.createStatement();
 
 			String stmt = "Insert into rider (RiderName,Address,Phone,DOB,CardNumber,CardExpDate,CVV,Email,Password) values ('"+rider.getName()+"','"
