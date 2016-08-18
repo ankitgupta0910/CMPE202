@@ -145,7 +145,7 @@ public void setDriverOffline(Driver driver){
 	Connection con = null;
 	Statement st = null;
 	ResultSet rs = null;
-	String stm = "update Driver set DriverStatus='offline' where Email='"+driver.getEmail()+"'";
+	String stm = "update driver set DriverStatus='offline' where DriverName='"+driver.getName()+"'";
 	try {
 		st.executeUpdate(stm);
 	} catch (SQLException e) {
@@ -174,7 +174,42 @@ public void setDriverOffline(Driver driver){
         }
     }
 }
-public void setRide(int driverId,Ride ride){
+public void setDriverRating(int driver,int rating){
+	
+	Connection con = null;
+	Statement st = null;
+	ResultSet rs = null;
+	System.out.println(driver + rating);
+	String stm = "update driver set DriverRating='"+rating+"' where DriverId='"+driver+"'";
+	try {
+		st.executeUpdate(stm);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	finally {
+        
+        try {
+            
+            if (rs != null) {
+                rs.close();
+            }
+            
+            if (st != null) {
+                st.close();
+            }
+            
+            if (con != null) {
+                con.close();
+            }
+
+        } catch (SQLException ex) {
+            
+            System.out.println("Error: "+ex.getMessage());
+        }
+    }
+}
+public int getDriverRating(int driverId){
 	Connection con = null;
     Statement st = null;
     ResultSet rs = null;
@@ -184,15 +219,10 @@ public void setRide(int driverId,Ride ride){
           con = DriverManager.getConnection(Constant.URL, Constant.USERNAME, Constant.PASSWORD);
           st = con.createStatement();
           
-          String stmt = "Insert into ride (RequestId,DriverId,RideStartTime,Fare,RideEndTime) values ('"+ride.getRequest().getRequestId()+"','"
-          										 +driverId+"','"
-          					
-          										 
-          										 +ride.getRideStartTime()+"','"
-          												+ride.getFare()+"','"
-          										 +ride.getRideEndTime()+"')";
-          										
-          st.executeUpdate(stmt);
+          String stmt = "select * from driver where DriverId = '"+driverId+"'";
+			rs=st.executeQuery(stmt);
+			while(rs.next())
+				return rs.getInt("DriverRating");
 
       } catch (SQLException ex) {
       
@@ -219,6 +249,104 @@ public void setRide(int driverId,Ride ride){
               System.out.println("Error: "+ex.getMessage());
           }
       }
+	return 0;
+
+}
+public void setRide(int driverId,Ride ride){
+	Connection con = null;
+    Statement st = null;
+    ResultSet rs = null;
+
+	  try {
+          
+          con = DriverManager.getConnection(Constant.URL, Constant.USERNAME, Constant.PASSWORD);
+          st = con.createStatement();
+          
+          String stmt = "Insert into ride (RequestId,DriverId,RideStartTime,Fare,RideEndTime) values ('"+ride.getRequest().getRequestId()+"','"
+          										 +driverId+"','"
+          					
+          										 
+          										 +ride.getRideStartTime()+"','"
+          												+ride.getFare()+"','"
+          										 +ride.getRideEndTime()+"')";
+          										
+         
+          st.executeUpdate(stmt, Statement.RETURN_GENERATED_KEYS);
+      	rs=st.getGeneratedKeys();
+      	rs.next();
+	         ride.setRideId(rs.getInt(1));
+
+      } catch (SQLException ex) {
+      
+         System.out.println("Error: "+ex.getMessage());
+
+      } finally {
+          
+          try {
+              
+              if (rs != null) {
+                  rs.close();
+              }
+              
+              if (st != null) {
+                  st.close();
+              }
+              
+              if (con != null) {
+                  con.close();
+              }
+
+          } catch (SQLException ex) {
+              
+              System.out.println("Error: "+ex.getMessage());
+          }
+      }
+
+}
+public int getDriverRide(Ride ride){
+	Connection con = null;
+    Statement st = null;
+    ResultSet rs = null;
+
+	  try {
+          
+          con = DriverManager.getConnection(Constant.URL, Constant.USERNAME, Constant.PASSWORD);
+          st = con.createStatement();
+          
+          String stmt = "select * from ride where RideId = '"+ride.getRideId()+"'";
+			rs=st.executeQuery(stmt);
+			int i=0;
+			System.out.println(rs.getInt("DriverId"));
+			while(rs.next())
+			i= rs.getInt("DriverId");
+			System.out.println(i);
+			return i;
+      } catch (SQLException ex) {
+      
+         System.out.println("Error: "+ex.getMessage());
+
+      } finally {
+          
+          try {
+              
+              if (rs != null) {
+                  rs.close();
+              }
+              
+              if (st != null) {
+                  st.close();
+              }
+              
+              if (con != null) {
+                  con.close();
+              }
+
+          } catch (SQLException ex) {
+              
+              System.out.println("Error: "+ex.getMessage());
+          }
+      }
+	return 0;
 
 }
 }

@@ -14,9 +14,9 @@ import java.util.Scanner;
 
 
 public class DriverSignin {
-	Driver driver;
+	Driver driver=new Driver();
 	public DriverSignin(){
-		signIn();
+		
 	}
 
 	public Driver signIn(){
@@ -46,7 +46,7 @@ public class DriverSignin {
 			con = DriverManager.getConnection(Constant.URL, Constant.USERNAME, Constant.PASSWORD);
 			st = con.createStatement();
 			
-			String stmt = "Select * from driver where Email = '"+email+"' and Password = '"+pass+"'";
+			String stmt = "Select * from driver where DriverName = '"+email+"' and Password = '"+pass+"'";
 			rs=st.executeQuery(stmt);
 		
 

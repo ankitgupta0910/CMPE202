@@ -8,12 +8,14 @@ import com.uber.fare.BasicCabFare;
 import com.uber.fare.BidAmountFare;
 import com.uber.fare.Fare;
 import com.uber.fare.PremiumCabFare;
+import com.uber.parking.FindParking;
 import com.uber.payments.CashPaymentStrategy;
 import com.uber.payments.CreditCardPaymentStrategy;
 import com.uber.payments.DebitCardPaymentStrategy;
 import com.uber.payments.PaymentContext;
 import com.uber.request.*;
 import com.uber.ride.Ride;
+import com.uber.reports.*;
 
 
 public class UberStart {
@@ -23,6 +25,7 @@ public class UberStart {
 	
 	private Driver driver;
 	private RiderSignin riderSignin;
+	private AdminSignin adminSignin;
 	boolean is_start=false;
 	boolean cancel_ride=false;
 	boolean displayRider=true;
@@ -47,7 +50,7 @@ public class UberStart {
 		System.out.println("***************************");
 		System.out.println("1. Rider Options");
 		System.out.println("2. Driver Options");
-
+		System.out.println("3. Admin");
 		System.out.println("0. Exit");
 		System.out.println("Please Enter you Option: ");
 		String read = sc.nextLine();
@@ -68,6 +71,10 @@ public class UberStart {
 			case 2:
 				displayDriverOptions();
 				break;
+			case 3:
+				displayAdminOptions();
+				break;
+				
 			
 			}
 		}
@@ -83,6 +90,7 @@ public class UberStart {
 			System.out.println("Driver Menu____________________________________");
 			System.out.println("1. Registration");
 			System.out.println("2. Login");
+			System.out.println("3. Parking");
 			System.out.println("0. Go to Main Options");
 			System.out.println("Please Enter you Option: ");
 			String line = sc.nextLine();
@@ -101,6 +109,11 @@ public class UberStart {
 					driver=new DriverSignin().signIn();
 					DriverCurrentState driverState=new DriverCurrentState(driver);
 					break;
+				case 3:
+					FindParking fp = new FindParking();
+					fp.Parking();
+					fp.GetParking(driver.getDriverId());
+					break;	
 				
 				}
 				if (option == 0) {
@@ -141,6 +154,7 @@ public class UberStart {
 				rider=riderSignin.signIn();
 					break;
 				case 3:
+					rideOn=true;
 					if (RiderSignin.currentRider() != null) {
 						request = riderSignin.requestACab();
 						
@@ -207,6 +221,17 @@ public class UberStart {
 					    			ride.rideEnd(DriverCurrentState.currentDriver);
 					    			System.out.println();
 					    			System.out.println();
+					    			System.out.println("**********Rate Driver******");
+					    			System.out.println("Do you want to Rate Driver");
+					    			if(sc.nextLine().equalsIgnoreCase("y")){
+					    			System.out.println("Rate Driver out of 5: ");
+					    			int rating =Integer.parseInt(sc.nextLine());
+					    			DriverRating driverRating=new DriverRating();
+					    			driverRating.rateDriver(ride,rating);
+					    			}
+					    			
+					    			System.out.println();
+					    			System.out.println();
 					    			System.out.println("***********Make Payment******");
 					    			System.out.println("How you are going to pay");
 					    			System.out.println("1. Cash");
@@ -255,6 +280,49 @@ public class UberStart {
 
 			}}
 	}
+	private void displayAdminOptions() {
+
+		try {
+			while (true) {
+				System.out.println();
+				System.out.println("Admin Options____________________________________");
+				System.out.println("1. List Driver");
+				System.out.println("2. List Riders");
+				System.out.println("3. List Ride History");
+				
+				System.out.println("0. Go to Main Menu");
+				System.out.println("Please Enter you Option: ");
+				String line = sc.nextLine();
+				if (line.isEmpty() || line.length() >= 2) {
+					System.out.println("Wrong Input. Please enter again.");
+					displayOptions();
+				} else {
+					
+					int option = Integer.parseInt(line);
+					switch (option) {
+					case 0:
+						break;
+					case 1:
+						new ListDrivers().showReport();;
+						break;
+					case 2:
+						new ListRiders().showReport();;
+						break;
+					case 3:
+						new ListRideHistory().showReport();;
+						break;
+						}
+						if (option == 0) {
+							break;
+						}
+					}
+
+				}
+
+		} finally{}
+	}
+	
+	
 public static void main(String[] args) {
 	UberStart uberStart = new UberStart();
 
