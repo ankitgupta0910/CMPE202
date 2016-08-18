@@ -1,6 +1,6 @@
 package com.uber.ride;
 
-import com.uber.database.DBConnect;
+
 
 public class RideStarted implements RideState {
 
@@ -23,13 +23,13 @@ public class RideStarted implements RideState {
 	@Override
 	public void rideEnd(int driverId) {
 		// TODO Auto-generated method stub
-		System.out.println("Ride Not Started Yet");
+		System.out.println("Ride Not Started Yet s");
 	}
 
 	@Override
 	public String rideInProgress() {
 		// TODO Auto-generated method stub
-		System.out.println("Ride Not Started Yet");
+		System.out.println("Ride Not Started Yet p");
 		return null;
 	}
 	

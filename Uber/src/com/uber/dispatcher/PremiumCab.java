@@ -14,7 +14,7 @@ public class PremiumCab extends CabType{
 	@Override
 	public Driver assignDrivers(Request request) {
 		// TODO Auto-generated method stub
-		return assignDrivers(request);
+		return assigningDrivers(request);
 	}
 }
 

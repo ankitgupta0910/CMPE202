@@ -1,14 +1,17 @@
 package com.uber.members;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+
 import java.util.Scanner;
 
+import com.uber.driverstate.DriverCurrentState;
+import com.uber.fare.BasicCabFare;
+import com.uber.fare.BidAmountFare;
+import com.uber.fare.Fare;
+import com.uber.fare.PremiumCabFare;
+import com.uber.payments.CashPaymentStrategy;
+import com.uber.payments.PaymentContext;
 import com.uber.request.*;
 import com.uber.ride.Ride;
-
-import uber.dispatch.driver.DriverCurrentState;
 
 
 public class UberStart {
@@ -20,14 +23,23 @@ public class UberStart {
 	private RiderSignin riderSignin;
 	boolean is_start=false;
 	boolean cancel_ride=false;
+	boolean displayRider=true;
 	boolean rideOn=true;
 	Ride ride = new Ride();
+	int fare;
+	
 
 	public UberStart() {
 		while (true)
 			displayOptions();
 	}
 	Scanner sc = new Scanner(System.in);
+	public void setDriver(Driver driver){
+		this.driver=driver;
+	}
+	public Driver getDriver(){
+		return driver;
+	}
 	private void displayOptions() {
 		System.out.println();
 		System.out.println("***************************");
@@ -98,7 +110,7 @@ public class UberStart {
 
 	private void displayRiderOptions() {
 
-		while (true) {
+		while (displayRider) {
 			System.out.println();
 			System.out.println("Rider Options____________________________________");
 			System.out.println("1. Registration");
@@ -116,7 +128,9 @@ public class UberStart {
 				int option = Integer.parseInt(line);
 				switch (option) {
 				case 0:
+					displayRider=false;
 					break;
+					
 				case 1:
 					new SignUpRider();
 					break;
@@ -151,7 +165,8 @@ public class UberStart {
 					    			is_start=true;
 					    			ride.setRequest(request);
 					    			ride.setRideStartTime();
-					    			ride.rideStart(driver.getDriverId());
+					    			ride.rideStart(DriverCurrentState.currentDriver);
+					    			ride.rideInProgress();
 					    			
 					    		}
 					    		else if(opt == 1 && is_start)
@@ -175,8 +190,32 @@ public class UberStart {
 					    		else
 					    		{
 					    			
+					    			if(request.getBidFare()>0)
+						    		{fare=new Fare(new BidAmountFare()).fareCalculate(request);
+						    			ride.setFare(fare);
+						    		}
+						    		else if(request.getVechicleType().equalsIgnoreCase("basic")){
+						    			fare=new Fare(new BasicCabFare()).fareCalculate(request);
+						    			ride.setFare(fare);
+						    		}
+						    		else{
+						    			fare=new Fare(new PremiumCabFare()).fareCalculate(request);
+						    			ride.setFare(fare);
+						    		}
+					    			ride.rideEnd(DriverCurrentState.currentDriver);
+					    			System.out.println();
+					    			System.out.println();
+					    			System.out.println("***********Make Payment******");
+					    			System.out.println("How you are going to pay");
+					    			System.out.println("1. Cash");
+					    			System.out.println("2. DebitCard");
+					    			System.out.println("3. CreditCard ");
+					    			int paymentOption=Integer.parseInt(sc.nextLine());
+					    			if(paymentOption==1){
+					    				PaymentContext payMethod =new PaymentContext();
+					    				payMethod.setPaymentStrategy(new CashPaymentStrategy());
 					    				
-					    			ride.rideEnd(driver.getDriverId());
+					    			}
 					    			rideOn=false;
 					    			
 					    		}
@@ -199,13 +238,10 @@ public class UberStart {
 			
 
 					break;
-				}
-					if (option == 0) {
-						break;
-					}
+				
 				}
 
-			}
+			}}
 	}
 public static void main(String[] args) {
 	UberStart uberStart = new UberStart();

@@ -21,6 +21,7 @@ public class RideInProgress implements RideState {
 		// TODO Auto-generated method stub
 		Ride ridde=(Ride)request;
 		System.out.println("Ride in progress with RequestId: "+ridde.getRequest().getRequestId());
+		request.setState(new RideCompleted(request));
 		return ridde.getRequest().getRequestId()+"";
 	}
 	

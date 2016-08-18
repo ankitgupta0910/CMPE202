@@ -151,10 +151,12 @@ public class RiderSignin {
 			request.setBookingDate(date);
 
 			System.out.println("Enter Type [Basic/Luxury]: ");
-			request.setVechicleType(sc.nextLine());
+			String cab=sc.nextLine();
+			request.setVechicleType(cab);
 
 			System.out.println("Child Seat [Y/N]: ");
 			request.setVechicleChild(sc.nextLine());
+			if(cab.equalsIgnoreCase("basic")){
 			System.out.println("You can also Bid for Cab [y/n]: ");
 			if (sc.nextLine().equalsIgnoreCase("y")) {
 				System.out.println("Amount for which you want to bid: ");
@@ -162,7 +164,7 @@ public class RiderSignin {
 
 				request.setBidFare(bid);
 			}
-
+			}
 		
 
 			System.out.println("Do you want to submit a request? [y/n]: ");

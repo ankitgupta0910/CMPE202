@@ -1,4 +1,4 @@
-package uber.dispatch.driver;
+package com.uber.driverstate;
 
 public interface DriverInterface {
 	public void isOnline();

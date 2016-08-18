@@ -184,11 +184,12 @@ public void setRide(int driverId,Ride ride){
           con = DriverManager.getConnection(Constant.URL, Constant.USERNAME, Constant.PASSWORD);
           st = con.createStatement();
           
-          String stmt = "Insert into ride (RequestId,DriverId,RiderId,RideStartTime,Fare,RideEndTime) values ('"+ride.getRequest().getRequestId()+"','"
+          String stmt = "Insert into ride (RequestId,DriverId,RideStartTime,Fare,RideEndTime) values ('"+ride.getRequest().getRequestId()+"','"
           										 +driverId+"','"
-          										 +ride.getRequest().getDestination()+"','"
-          										 +ride.getFare()+"','"
+          					
+          										 
           										 +ride.getRideStartTime()+"','"
+          												+ride.getFare()+"','"
           										 +ride.getRideEndTime()+"')";
           										
           st.executeUpdate(stmt);

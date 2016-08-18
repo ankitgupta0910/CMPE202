@@ -2,6 +2,11 @@ package com.uber.request;
 
 import java.util.Date;
 
+import com.uber.fare.BasicCabFare;
+import com.uber.fare.BidAmountFare;
+import com.uber.fare.Fare;
+import com.uber.fare.PremiumCabFare;
+
 public class Request implements RideRequestInterface {
 	
 
@@ -18,7 +23,7 @@ public class Request implements RideRequestInterface {
 	private Date bookingDate;
 	private String vechicleType;
 	private String vehicleChild;
-	private double FareEstimation;
+	private int fareEstimation;
 	private int bidFare;
 	
 
@@ -94,13 +99,7 @@ public class Request implements RideRequestInterface {
 		this.destination = destination;
 	}
 
-	public double getFareEstimation() {
-		return FareEstimation;
-	}
-
-	public void setFareEstimation(double avg) {
-		FareEstimation = avg;
-	}
+	
 
 	public Date getBookingDate() {
 		return bookingDate;
@@ -124,9 +123,8 @@ public class Request implements RideRequestInterface {
 				+ "]");
 		sb.append("\nBooking Date: " + bookingDate);
 		sb.append("\nCar Type: " + vechicleType);
-		sb.append("\nEstimated Fare: " + bidFare);
-		FareEstimation+=bidFare;
-		sb.append("\nEstimated Fare: " + FareEstimation);
+		sb.append("\nEstimated Fare: " + getFareEstimation());
+	
 		
 
 		String string = sb.toString();
@@ -196,4 +194,18 @@ public class Request implements RideRequestInterface {
 	public void setBidFare(int bidFare) {
 		this.bidFare = bidFare;
 	}
+
+	public int getFareEstimation() {
+		if(getBidFare()>0)
+		{
+			return getBidFare();
+		}
+		else if(getVechicleType().equalsIgnoreCase("basic")){
+			return new Fare(new BasicCabFare()).fareCalculate(this);
+		}
+		else{
+			return new Fare(new PremiumCabFare()).fareCalculate(this);
+		}
+	}
+
 }

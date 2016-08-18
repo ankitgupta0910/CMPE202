@@ -1,16 +1,21 @@
-package uber.dispatch.driver;
+package com.uber.driverstate;
 
 import com.uber.members.Driver;
 
 public class DriverCurrentState implements DriverInterface {
 	DriverState driverState;
+	public static int currentDriver;
+	public static void setCurrentDriver(int d)
+	{
+		currentDriver=d;
+	}
 	
 	public DriverCurrentState(Driver driver){
 		
 		 driverState = new IsOnline(driver);
 		
 	}
-
+	
 	@Override
 	public void isOnline() {
 		// TODO Auto-generated method stub

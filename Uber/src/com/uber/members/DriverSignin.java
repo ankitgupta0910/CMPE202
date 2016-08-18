@@ -2,9 +2,8 @@ package com.uber.members;
 
 import java.sql.Connection;
 import com.uber.constants.*;
-
-import uber.dispatch.driver.DriverCurrentState;
-import uber.dispatch.driver.IsOnline;
+import com.uber.driverstate.DriverCurrentState;
+import com.uber.driverstate.IsOnline;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;

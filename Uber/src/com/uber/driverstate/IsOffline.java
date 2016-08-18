@@ -1,4 +1,4 @@
-package uber.dispatch.driver;
+package com.uber.driverstate;
 
 import com.uber.members.Driver;
 

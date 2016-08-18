@@ -36,12 +36,12 @@ public class Ride implements RideInterface {
 	@Override
 	public RideState getState() {
 		// TODO Auto-generated method stub
-		return null;
+		return rideState;
 	}
 	@Override
-	public void setState(RideState s) {
+	public void setState(RideState rideState) {
 		// TODO Auto-generated method stub
-		
+		this.rideState=rideState;
 	}
 
 	public Request getRequest() {

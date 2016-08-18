@@ -21,7 +21,9 @@ public class RideCompleted implements RideState{
 	public void rideEnd(int driverId) {
 		// TODO Auto-generated method stub
 		Ride ride=(Ride)request;
+		ride.setRideEndTime();
 		new DBConnect().setRide(driverId, ride);
+		System.out.println("Ride Ended! Have agood day");
 		
 	}
 

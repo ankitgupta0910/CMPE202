@@ -5,6 +5,11 @@ import java.util.Scanner;
 
 import com.uber.constants.Constant;
 import com.uber.database.DBConnect;
+import com.uber.driverstate.DriverCurrentState;
+import com.uber.fare.BasicCabFare;
+import com.uber.fare.BidAmountFare;
+import com.uber.fare.Fare;
+import com.uber.fare.PremiumCabFare;
 import com.uber.members.Driver;
 import com.uber.members.UberStart;
 import com.uber.request.Request;
@@ -63,11 +68,7 @@ public class DispatchDriver {
 			
 			System.out.println("");
 			System.out.println("");
-			System.out.println("Driver No "+ availableDriver.getDriverId()+" do you want to accept this Ride? [Y/N]");
-			System.out.println("");
-	        String s = sc.nextLine();
-	        if(s.equalsIgnoreCase("Y"))
-	        {
+			
 	        	
 	    		System.out.println("");
 	    		System.out.println("Dear Customer your ride is confirmed. These are the details : :");
@@ -75,100 +76,23 @@ public class DispatchDriver {
 	    		System.out.println("Vehicle Registeration : "+availableDriver.getVehicleRegNumber());
 	    		System.out.println("Vehicle Color : "+availableDriver.getVehicleColor());
 	    		System.out.println("Rating of Driver :" + availableDriver.getDriverRating());
-	    		System.out.println("Estimated Fare :" );
+	    		if(request.getBidFare()>0)
+	    		{
+	    			System.out.println("Fare Amount is: "+new Fare(new BidAmountFare()).fareCalculate(request));
+	    		}
+	    		else if(request.getVechicleType().equalsIgnoreCase("basic")){
+	    			System.out.println("Fare Amount is: "+new Fare(new BasicCabFare()).fareCalculate(request));
+	    		}
+	    		else{
+	    			System.out.println("Fare Amount is: "+new Fare(new PremiumCabFare()).fareCalculate(request));
+	    		}
+	    		DriverCurrentState.setCurrentDriver(availableDriver.getDriverId());
 	    		
 	    	
 	    		
-	        }
-	        else{
-	        	db.setDriverOffline(availableDriver);
-	        	
-	        	
-	        	request.requestAccepted();
-	        	
-	        }
-	       
-		
-//		
-//	
-//		
-//		
-//		do
-//		{
-//			System.out.println("");
-//			
-//    		System.out.println("*****For Driver*******");
-//    		System.out.println(" 1 : Start Ride");
-//    		System.out.println(" 2 : End Ride");
-//    		System.out.println(" 3 : Report Issue");
-//    		System.out.println("");
-//    		System.out.println("******For User******");
-//    		System.out.println(" 4 : Cancel Ride");
-//    		
-//    		int option =Integer.parseInt(sc.nextLine());
-//    		if(s.equals("1") && !is_start)
-//    		{
-//    			is_start=true;
-//    			ride.rideStart();
-//    		}
-//    		else if(s.equals("1") && is_start)
-//    		{
-//    			System.out.println("Ride is already started.");
-//    		}
-//    		
-//    		else if(s.equals("2") && !is_start)
-//    		{
-//    			System.out.println("Ride is not even started.");
-//    		
-//    		}
-//    		else if(s.equals("3") && !is_start)
-//    		{
-//    			System.out.println("Dear Customer your ride have some issues");
-//    		}
-//    		else if(s.equals("3") && is_start)
-//    		{
-//    			System.out.println("Ride is already started. Cant delay it. Invalid selection");
-//    		}
-//    		else
-//    		{
-//    			if(s.equals("4"))
-//    				cancel_ride=true;
-//    			rideClass.modifyRide(s);
-//    			command="-2";
-//    		}
-//		}
-//		while(!command.equals("-2"));
-//		
-//		
-//		///if ride is cancelledd
-//		
-//		if(cancel_ride)
-//		{
-//			System.out.println("Your Ride is cancelled.");
-//			MainMenu mainMenu = new MainMenu();
-//		}
-//		
-//		
-//		
-///
-//		
-//		rideClass.setRequest_id(request.getRequestId());
-//		rideClass.setDriver_id(confirmedDriver.getId());
-//		rideClass.setStart_time(new java.util.Date());
-//		rideClass.setEnd_time(new java.util.Date());
-//		rideClass.setFare(request.getFareEstimation());
-//		
-//		rideClass.setDriver_rating(0);
-//		rideClass.setUser_rating(0);
-//		rideClass.setStatus("Completed");
-//		
-//		rideClass.makePayment(rideClass);
-//		
-//		
-//	}
-//		catch(Exception e)
-//		{e.printStackTrace();}
-//	}
+	        
+	      
+
 
 }
 }
