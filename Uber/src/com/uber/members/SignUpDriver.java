@@ -22,6 +22,12 @@ public class SignUpDriver {
 		setVehicleColor();
 		setChildSeat();
 		storeData();
+		setSourceLat();
+		setSourceLong();
+		
+
+
+		
 	}
 	
 	public void setName(){
@@ -97,6 +103,13 @@ public class SignUpDriver {
 	
 	public void storeData(){
 		new StoreDriverData(driver);
+	}
+	public void setSourceLat(){
+	
+		driver.setSourceLat(1);
+	}
+	public void setSourceLong(){
+		driver.setSourceLong(1);
 	}
 	
 	

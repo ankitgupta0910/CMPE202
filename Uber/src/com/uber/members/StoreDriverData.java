@@ -27,9 +27,11 @@ public class StoreDriverData {
             con = DriverManager.getConnection(Constant.URL,Constant.USERNAME, Constant.PASSWORD);
             st = con.createStatement();
 
-            String stmt = "Insert into driver (DriverName,Address,Phone,DOB,DriverLicenseNumber,VehicleColor,VehicleRegNumber,VehicleType,Email,Password,HasChildSeat,DriverRating,DriverStatus) values ('"+driver.getName()+"','"
+            String stmt = "Insert into driver (DriverName,Address,Phone,SourceLat,SourceLong,DOB,DriverLicenseNumber,VehicleColor,VehicleRegNumber,VehicleType,Email,Password,HasChildSeat,DriverRating,DriverStatus) values ('"+driver.getName()+"','"
             										 +driver.getAddress()+"','"
             										 +driver.getPhone()+"','"
+            										 +driver.getSourceLat()+"','"
+            										 +driver.getSourceLong()+"','"
             										 +driver.getDob()+"','"
             										 +driver.getLicenseNumber()+"','"
             										 +driver.getVehicleColor()+"','"

@@ -56,6 +56,7 @@ public class UberStart {
 		String read = sc.nextLine();
 		if (read.isEmpty() || read.length() >= 2) {
 			System.out.println("Please Enter correct Input!");
+			displayRider=true;
 			displayOptions();
 		} else {
 			int option = Integer.parseInt(read);
