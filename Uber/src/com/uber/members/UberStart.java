@@ -9,6 +9,8 @@ import com.uber.fare.BidAmountFare;
 import com.uber.fare.Fare;
 import com.uber.fare.PremiumCabFare;
 import com.uber.payments.CashPaymentStrategy;
+import com.uber.payments.CreditCardPaymentStrategy;
+import com.uber.payments.DebitCardPaymentStrategy;
 import com.uber.payments.PaymentContext;
 import com.uber.request.*;
 import com.uber.ride.Ride;
@@ -214,7 +216,17 @@ public class UberStart {
 					    			if(paymentOption==1){
 					    				PaymentContext payMethod =new PaymentContext();
 					    				payMethod.setPaymentStrategy(new CashPaymentStrategy());
-					    				
+					    				payMethod.pay(fare);
+					    			}
+					    			else if(paymentOption==2){
+					    				PaymentContext payMethod =new PaymentContext();
+					    				payMethod.setPaymentStrategy(new DebitCardPaymentStrategy());
+					    				payMethod.pay(fare);
+					    			}
+					    			else{
+					    				PaymentContext payMethod =new PaymentContext();
+					    				payMethod.setPaymentStrategy(new CreditCardPaymentStrategy());
+					    				payMethod.pay(fare);
 					    			}
 					    			rideOn=false;
 					    			

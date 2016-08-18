@@ -2,6 +2,7 @@ package com.uber.members;
 
 import java.sql.Connection;
 
+
 import com.uber.constants.*;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -12,7 +13,9 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import com.uber.request.ChildSeatRequestDecorator;
 import com.uber.request.Request;
+
 
 
 
@@ -153,19 +156,26 @@ public class RiderSignin {
 			System.out.println("Enter Type [Basic/Luxury]: ");
 			String cab=sc.nextLine();
 			request.setVechicleType(cab);
-
-			System.out.println("Child Seat [Y/N]: ");
-			request.setVechicleChild(sc.nextLine());
 			if(cab.equalsIgnoreCase("basic")){
-			System.out.println("You can also Bid for Cab [y/n]: ");
-			if (sc.nextLine().equalsIgnoreCase("y")) {
-				System.out.println("Amount for which you want to bid: ");
-				int bid=Integer.parseInt(sc.nextLine());
+				System.out.println("You can also Bid for Cab [y/n]: ");
+				if (sc.nextLine().equalsIgnoreCase("y")) {
+					System.out.println("Amount for which you want to bid: ");
+					int bid=Integer.parseInt(sc.nextLine());
 
-				request.setBidFare(bid);
-			}
-			}
+					request.setBidFare(bid);
+				}
+				}
+			
+			System.out.println("Child Seat [Y/N]: ");
 		
+			if (sc.nextLine().equalsIgnoreCase("y")) {
+				// DECORATOR PATTERN TO ADD CAR SEAT FEATURE
+
+				ChildSeatRequestDecorator decoratedRequest = new ChildSeatRequestDecorator(request);
+				decoratedRequest.setChildSeatFlag(true);
+			} else
+				request.setChildSeatFlag(false);
+			
 
 			System.out.println("Do you want to submit a request? [y/n]: ");
 			if (sc.nextLine().equalsIgnoreCase("y")) {

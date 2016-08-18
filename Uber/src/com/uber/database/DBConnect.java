@@ -38,7 +38,7 @@ public class DBConnect {
             										 +request.getBookingDate()+"','"
             										 +request.getVechicleType()+"','"
             										 +request.getRequestType()+"','"
-                    								 +request.getVechicleChild()+"','"
+                    								 +request.getChildSeat()+"','"
                     								 +request.getBidFare()+"','"
                     								 +request.getPickX()+"','"
                     								+request.getPickY()+"','"

@@ -3,7 +3,7 @@ package com.uber.request;
 import java.util.Date;
 
 import com.uber.fare.BasicCabFare;
-import com.uber.fare.BidAmountFare;
+
 import com.uber.fare.Fare;
 import com.uber.fare.PremiumCabFare;
 
@@ -22,9 +22,10 @@ public class Request implements RideRequestInterface {
 
 	private Date bookingDate;
 	private String vechicleType;
-	private String vehicleChild;
+
 	private int fareEstimation;
 	private int bidFare;
+	private boolean childSeatFlag;
 	
 
 	
@@ -179,13 +180,7 @@ public class Request implements RideRequestInterface {
 		this.vechicleType = vechicleType;
 	}
 
-	public String getVechicleChild() {
-		return vehicleChild;
-	}
-
-	public void setVechicleChild(String vechicleChild) {
-		this.vehicleChild = vechicleChild;
-	}
+	
 
 	public int getBidFare() {
 		return bidFare;
@@ -206,6 +201,19 @@ public class Request implements RideRequestInterface {
 		else{
 			return new Fare(new PremiumCabFare()).fareCalculate(this);
 		}
+	}
+
+	@Override
+	public void setChildSeatFlag(boolean b) {
+		// TODO Auto-generated method stub
+		childSeatFlag=b;
+	}
+
+	public String getChildSeat(){
+		if(childSeatFlag)
+			return "y";
+		else
+			return "n";
 	}
 
 }

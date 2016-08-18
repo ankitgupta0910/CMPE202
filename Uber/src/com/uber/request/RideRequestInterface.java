@@ -8,6 +8,8 @@ public interface RideRequestInterface {
 	public void requestCompleted();
 	public RequestState getState();
 	public void setState(RequestState s);
+	public void setChildSeatFlag(boolean b);
+	
 
 	
 
