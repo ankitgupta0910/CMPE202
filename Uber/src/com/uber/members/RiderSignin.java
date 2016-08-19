@@ -153,7 +153,7 @@ public class RiderSignin {
 			
 			request.setBookingDate(date);
 
-			System.out.println("Enter Type [Basic/Luxury]: ");
+			System.out.println("Enter Type [Basic/Premium]: ");
 			String cab=sc.nextLine();
 			request.setVechicleType(cab);
 			if(cab.equalsIgnoreCase("basic")){

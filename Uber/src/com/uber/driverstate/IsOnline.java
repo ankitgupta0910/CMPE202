@@ -1,10 +1,12 @@
 package com.uber.driverstate;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.uber.constants.Constant;
 import com.uber.members.Driver;
 
 public class IsOnline implements DriverState{
@@ -19,8 +21,11 @@ public class IsOnline implements DriverState{
 		Connection con = null;
 		Statement st = null;
 		ResultSet rs = null;
-		String stm = "update Driver set DriverStatus='online' where Email='"+driver.getEmail()+"'";
+
 		try {
+			con = DriverManager.getConnection(Constant.URL, Constant.USERNAME, Constant.PASSWORD);
+			st = con.createStatement();
+			String stm = "update driver set DriverStatus='online' where DriverName='"+driver.getName()+"'";			
 			st.executeUpdate(stm);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

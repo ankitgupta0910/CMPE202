@@ -43,7 +43,7 @@ public class DispatchDriver {
 		}
 		else 
 		{
-			assignDriver=new AssignBasicDriver();
+			assignDriver=new AssignPremiumDriver();
 			cabType=new PremiumCab(assignDriver);
 		}
 		

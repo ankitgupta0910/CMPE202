@@ -109,6 +109,7 @@ public class UberStart {
 				case 2:
 					driver=new DriverSignin().signIn();
 					DriverCurrentState driverState=new DriverCurrentState(driver);
+					driverState.isOnline();
 					break;
 				case 3:
 					FindParking fp = new FindParking();
