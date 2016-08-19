@@ -9,12 +9,12 @@ public class LocationMapping {
 
 	private LocationMapping() {
 		getLocations().put("1 Washington Square , San Jose", new Location(2, 3));
-		getLocations().put("2933 Bunker hill lane, Santa Clara", new Location(3, 5));
-		getLocations().put("1000 Lakeshore circle , Campbell", new Location(1, 2));
-		getLocations().put("2045 W Remington Drive, Fremont", new Location(1, 2));
-		getLocations().put("4322 Albany dr, Fremont", new Location(4,5));
-		getLocations().put("2134 Kaiser dr, Cupertino", new Location(3,4));
-		getLocations().put("900 Kaiely dr, Palo Alto", new Location(6,6));
+		getLocations().put("1883 Agnew Road, Santa Clara", new Location(3, 5));
+		getLocations().put("190 Ryland Street , Campbell", new Location(1, 2));
+		getLocations().put("3481 S Bascom Ave, Fremont", new Location(1, 2));
+		getLocations().put("14777 Los Gatos BLVD, Fremont", new Location(4,5));
+		getLocations().put("1410 Camden Ave, Cupertino", new Location(3,4));
+		getLocations().put("3025 Meridian Ave, Palo Alto", new Location(6,6));
 	}
 
 	public static LocationMapping getLocationObject() {

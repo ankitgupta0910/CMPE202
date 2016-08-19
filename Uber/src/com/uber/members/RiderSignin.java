@@ -126,7 +126,6 @@ public class RiderSignin {
 			System.out.println("Pick Up Location [pick from above list]: ");
 			int index = Integer.parseInt(sc.nextLine());
 			String selected = (String) (locations.keySet().toArray()[index - 1]);
-
 			Location location1 = locations.get(selected);
 
 			request.setPickX(location1.x);
